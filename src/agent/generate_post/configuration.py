@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, fields
-from typing import Optional
+from dataclasses import dataclass, fields, field
+from typing import Optional , Annotated
 
 from langchain_core.runnables import RunnableConfig
 
@@ -17,6 +17,21 @@ class Configuration:
     # create assistants (https://langchain-ai.github.io/langgraph/cloud/how-tos/configuration_cloud/)
     # and when you invoke the graph
     my_configurable_param: str = "changeme"
+
+    grader_model:  Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
+        default="gpt-4o-mini",
+        metadata={
+            "description": "The model to use for grading the post relevance to the business."
+        }
+    )
+
+    ### prompts
+    business_context: str = field(
+        default="Your company develops AI and automation solutions.",
+        metadata={
+            "description": "The context of the business."
+        }
+    )
 
     @classmethod
     def from_runnable_config(
