@@ -17,7 +17,7 @@ def scrape_website(url: str) -> Dict:
         - text: main content text
         - domain: website domain
     """
-    print(f"Scraping website: {url}")
+    
     try:
         # Send request with headers to mimic browser
         headers = {
@@ -28,7 +28,7 @@ def scrape_website(url: str) -> Dict:
         response.raise_for_status()
         
         soup = BeautifulSoup(response.text, 'html.parser')
-        print(soup)
+        
         # Extract basic information
         title = soup.title.string if soup.title else ""
         description = soup.find("meta", {"name": "description"})

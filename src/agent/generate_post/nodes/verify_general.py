@@ -51,13 +51,13 @@ async def verifyGeneralContent(state: GeneratePostState, config: RunnableConfig)
     
     relevant = cast(Grader, await llm.with_structured_output(Grader).ainvoke(messages))
     print(relevant)
-    
+
     if relevant.relevant == "yes":
         print("Relevant")
         state.page_contents = page_contents
         return {
-            "relevant_links": [state.url],
-            "page_contents": [page_contents],
+            "relevant_links": [str(state.url)],  # Convert HttpUrl to string here
+            "page_contents": page_contents,
         }
     return {
         "relevant_links": [],

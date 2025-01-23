@@ -25,6 +25,13 @@ class Configuration:
         }
     )
 
+    report_model:  Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
+        default="gpt-4o-mini",
+        metadata={
+            "description": "The model to use for generating the report."
+        }
+    )
+
     ### prompts
     business_context: str = field(
         default="Your company develops AI and automation solutions.",
